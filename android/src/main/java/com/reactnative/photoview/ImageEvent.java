@@ -9,7 +9,6 @@
 
 package com.reactnative.photoview;
 
-import android.support.annotation.IntDef;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
@@ -18,10 +17,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class ImageEvent extends Event<ImageEvent> {
-  @IntDef({ON_ERROR, ON_LOAD, ON_LOAD_END, ON_LOAD_START, ON_TAP, ON_VIEW_TAP, ON_SCALE})
-  @Retention(RetentionPolicy.SOURCE)
-  @interface ImageEventType {}
-
   public static final int ON_ERROR = 1;
   public static final int ON_LOAD = 2;
   public static final int ON_LOAD_END = 3;
@@ -33,13 +28,13 @@ public class ImageEvent extends Event<ImageEvent> {
   private final int mEventType;
   private WritableMap mMap;
 
-  public ImageEvent(int viewId, @ImageEventType int eventType) {
+  public ImageEvent(int viewId, int eventType) {
     super(viewId);
     mEventType = eventType;
     mMap = null;
   }
 
-  public static String eventNameForType(@ImageEventType int eventType) {
+  public static String eventNameForType(int eventType) {
     switch(eventType) {
       case ON_ERROR:
         return "photoViewError";
